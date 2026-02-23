@@ -11,88 +11,172 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #2C3E50;
+            --primary-light: #34495E;
+            --accent: #E8B923;
+            --accent-dark: #D4A017;
+            --text: #2C3E50;
+            --text-light: #7F8C8D;
+            --bg: #F8F9FA;
+            --white: #FFFFFF;
+            --shadow: rgba(44, 62, 80, 0.08);
+            --shadow-hover: rgba(44, 62, 80, 0.12);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
             min-height: 100vh;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: 0 20px 80px var(--shadow), 0 0 1px rgba(0,0,0,0.05);
+            max-width: 480px;
             width: 100%;
             overflow: hidden;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 48px 32px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            position: relative;
         }
 
         .header h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
+            font-size: 32px;
             font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            position: relative;
         }
 
         .header p {
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 15px;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+            position: relative;
         }
 
         .form-container {
-            padding: 30px 20px;
+            padding: 32px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.15s; }
+        .form-group:nth-child(3) { animation-delay: 0.2s; }
+        .form-group:nth-child(4) { animation-delay: 0.25s; }
+        .form-group:nth-child(5) { animation-delay: 0.3s; }
+        .form-group:nth-child(6) { animation-delay: 0.35s; }
+        .form-group:nth-child(7) { animation-delay: 0.4s; }
+        .form-group:nth-child(8) { animation-delay: 0.45s; }
+        .form-group:nth-child(9) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #333;
+            margin-bottom: 10px;
+            color: var(--text);
             font-weight: 600;
             font-size: 14px;
+            letter-spacing: -0.2px;
         }
 
         input, select, textarea {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            padding: 16px 18px;
+            border: 2px solid #E8ECF0;
+            border-radius: 12px;
             font-size: 16px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-family: inherit;
+            background: var(--white);
+            color: var(--text);
         }
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(232, 185, 35, 0.1);
+            transform: translateY(-1px);
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #BDC3C7;
         }
 
         textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 100px;
         }
 
         .radio-group {
-            display: flex;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             margin-top: 10px;
-        }
-
-        .radio-item {
-            flex: 1;
         }
 
         .radio-item input[type="radio"] {
@@ -100,39 +184,68 @@
         }
 
         .radio-item label {
-            display: block;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            border: 2px solid #E8ECF0;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-size: 15px;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .radio-item label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .radio-item label span {
+            position: relative;
+            z-index: 1;
         }
 
         .radio-item input[type="radio"]:checked + label {
-            background: #667eea;
+            border-color: var(--accent);
             color: white;
-            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(232, 185, 35, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .radio-item input[type="radio"]:checked + label::before {
+            opacity: 1;
         }
 
         .btn {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 18px;
+            border-radius: 12px;
+            font-size: 17px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 24px rgba(232, 185, 35, 0.3);
+            letter-spacing: 0.3px;
+            margin-top: 8px;
         }
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 12px 32px rgba(232, 185, 35, 0.4);
         }
 
         .btn:active {
@@ -141,46 +254,129 @@
 
         .success-message {
             display: none;
-            background: #4caf50;
+            background: linear-gradient(135deg, #27AE60 0%, #229954 100%);
             color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 40px 32px;
+            border-radius: 20px;
             text-align: center;
-            margin-top: 20px;
-            animation: slideIn 0.5s ease;
+            margin: 20px;
+            animation: scaleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 20px 60px rgba(39, 174, 96, 0.3);
         }
 
         .success-message.show {
             display: block;
         }
 
-        @keyframes slideIn {
+        @keyframes scaleIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: scale(0.9);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
             }
         }
 
-        .icon {
-            font-size: 48px;
-            margin-bottom: 10px;
+        .success-icon {
+            width: 72px;
+            height: 72px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 24px;
+            animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s backwards;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-message h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .success-message p {
+            font-size: 16px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon input,
+        .input-icon select {
+            padding-left: 48px;
+        }
+
+        .input-icon::before {
+            content: attr(data-icon);
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            pointer-events: none;
+            opacity: 0.6;
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 10px;
+                padding: 12px;
+            }
+
+            .header {
+                padding: 40px 24px 32px;
             }
 
             .header h1 {
-                font-size: 24px;
+                font-size: 28px;
             }
 
             .form-container {
-                padding: 20px 15px;
+                padding: 24px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1a1a1a;
+                --white: #2d2d2d;
+                --text: #e0e0e0;
+                --text-light: #a0a0a0;
+                --shadow: rgba(0, 0, 0, 0.3);
+            }
+
+            input, select, textarea {
+                background: #353535;
+                border-color: #4a4a4a;
+                color: var(--text);
+            }
+
+            input::placeholder, textarea::placeholder {
+                color: #666;
             }
         }
     </style>
@@ -188,112 +384,135 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="icon">🚐</div>
-            <h1>Запис на трансфер</h1>
+            <div class="header-icon">🚐</div>
+            <h1>Трансфер-сервіс</h1>
             <p>Ruta Resort Поляниця</p>
         </div>
 
         <div class="form-container">
             <form id="transferForm">
                 <div class="form-group">
-                    <label for="name">Ім'я та прізвище *</label>
-                    <input type="text" id="name" name="name" required placeholder="Введіть ваше ім'я">
+                    <label for="name">Ім'я та прізвище</label>
+                    <div class="input-icon" data-icon="👤">
+                        <input type="text" id="name" name="name" required placeholder="Іван Петренко">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="phone">Телефон *</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="+380 XX XXX XX XX">
+                    <label for="phone">Телефон</label>
+                    <div class="input-icon" data-icon="📱">
+                        <input type="tel" id="phone" name="phone" required placeholder="+380 XX XXX XX XX">
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email (опціонально)</label>
-                    <input type="email" id="email" name="email" placeholder="example@mail.com">
+                    <div class="input-icon" data-icon="✉️">
+                        <input type="email" id="email" name="email" placeholder="example@mail.com">
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Тип трансфера *</label>
+                    <label>Тип трансфера</label>
                     <div class="radio-group">
                         <div class="radio-item">
                             <input type="radio" id="arrival" name="type" value="arrival" required>
-                            <label for="arrival">Прибуття</label>
+                            <label for="arrival"><span>🛬 Прибуття</span></label>
                         </div>
                         <div class="radio-item">
                             <input type="radio" id="departure" name="type" value="departure">
-                            <label for="departure">Виїзд</label>
+                            <label for="departure"><span>🛫 Виїзд</span></label>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="date">Дата *</label>
-                    <input type="date" id="date" name="date" required>
+                    <label for="date">Дата</label>
+                    <div class="input-icon" data-icon="📅">
+                        <input type="date" id="date" name="date" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="time">Час *</label>
-                    <input type="time" id="time" name="time" required>
+                    <label for="time">Час</label>
+                    <div class="input-icon" data-icon="⏰">
+                        <input type="time" id="time" name="time" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="location">Місце відправлення / прибуття *</label>
-                    <select id="location" name="location" required>
-                        <option value="">Оберіть...</option>
-                        <option value="ivano-frankivsk-airport">Аеропорт Івано-Франківськ</option>
-                        <option value="ivano-frankivsk-train">ЖД вокзал Івано-Франківськ</option>
-                        <option value="lviv-airport">Аеропорт Львів</option>
-                        <option value="lviv-train">ЖД вокзал Львів</option>
-                        <option value="kyiv">Київ</option>
-                        <option value="other">Інше місце</option>
-                    </select>
+                    <label for="location">Місце відправлення / прибуття</label>
+                    <div class="input-icon" data-icon="📍">
+                        <select id="location" name="location" required>
+                            <option value="">Оберіть місце...</option>
+                            <option value="ivano-frankivsk-airport">🛬 Аеропорт Івано-Франківськ</option>
+                            <option value="ivano-frankivsk-train">🚂 ЖД вокзал Івано-Франківськ</option>
+                            <option value="lviv-airport">🛬 Аеропорт Львів</option>
+                            <option value="lviv-train">🚂 ЖД вокзал Львів</option>
+                            <option value="kyiv">🏙️ Київ</option>
+                            <option value="other">📌 Інше місце</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="passengers">Кількість пасажирів *</label>
-                    <input type="number" id="passengers" name="passengers" min="1" max="8" value="1" required>
+                    <label for="passengers">Кількість пасажирів</label>
+                    <div class="input-icon" data-icon="👥">
+                        <input type="number" id="passengers" name="passengers" min="1" max="8" value="1" required>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="notes">Додаткова інформація</label>
-                    <textarea id="notes" name="notes" placeholder="Номер рейсу, особливі побажання тощо"></textarea>
+                    <textarea id="notes" name="notes" placeholder="Номер рейсу, багаж, особливі побажання..."></textarea>
                 </div>
 
                 <button type="submit" class="btn">Замовити трансфер</button>
             </form>
 
             <div id="successMessage" class="success-message">
-                <div class="icon">✅</div>
-                <h2>Дякуємо!</h2>
-                <p>Ваш запит на трансфер прийнято.<br>Ми зв'яжемося з вами найближчим часом.</p>
+                <div class="success-icon">✓</div>
+                <h2>Готово!</h2>
+                <p>Ваш запит прийнято.<br>Ми зв'яжемося з вами найближчим часом</p>
             </div>
         </div>
     </div>
 
     <script>
-        // Встановлюємо мінімальну дату на сьогодні
         const dateInput = document.getElementById('date');
         const today = new Date().toISOString().split('T')[0];
         dateInput.setAttribute('min', today);
 
-        // Обробка форми
         document.getElementById('transferForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const data = Object.fromEntries(formData);
             
-            // Тут можна додати відправку на сервер
             console.log('Дані форми:', data);
             
-            // Показуємо повідомлення про успіх
             this.style.display = 'none';
             document.getElementById('successMessage').classList.add('show');
             
-            // Через 5 секунд повертаємо форму
             setTimeout(() => {
                 this.reset();
                 this.style.display = 'block';
                 document.getElementById('successMessage').classList.remove('show');
             }, 5000);
+        });
+
+        // Smooth scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.form-group').forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>
