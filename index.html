@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запис на трансфер | Ruta Resort</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 30px 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .radio-item {
+            flex: 1;
+        }
+
+        .radio-item input[type="radio"] {
+            display: none;
+        }
+
+        .radio-item label {
+            display: block;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .radio-item input[type="radio"]:checked + label {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            display: none;
+            background: #4caf50;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            animation: slideIn 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .form-container {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="icon">🚐</div>
+            <h1>Запис на трансфер</h1>
+            <p>Ruta Resort Поляниця</p>
+        </div>
+
+        <div class="form-container">
+            <form id="transferForm">
+                <div class="form-group">
+                    <label for="name">Ім'я та прізвище *</label>
+                    <input type="text" id="name" name="name" required placeholder="Введіть ваше ім'я">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+380 XX XXX XX XX">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email (опціонально)</label>
+                    <input type="email" id="email" name="email" placeholder="example@mail.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Тип трансфера *</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="arrival" name="type" value="arrival" required>
+                            <label for="arrival">Прибуття</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="departure" name="type" value="departure">
+                            <label for="departure">Виїзд</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Дата *</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Час *</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Місце відправлення / прибуття *</label>
+                    <select id="location" name="location" required>
+                        <option value="">Оберіть...</option>
+                        <option value="ivano-frankivsk-airport">Аеропорт Івано-Франківськ</option>
+                        <option value="ivano-frankivsk-train">ЖД вокзал Івано-Франківськ</option>
+                        <option value="lviv-airport">Аеропорт Львів</option>
+                        <option value="lviv-train">ЖД вокзал Львів</option>
+                        <option value="kyiv">Київ</option>
+                        <option value="other">Інше місце</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="passengers">Кількість пасажирів *</label>
+                    <input type="number" id="passengers" name="passengers" min="1" max="8" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Додаткова інформація</label>
+                    <textarea id="notes" name="notes" placeholder="Номер рейсу, особливі побажання тощо"></textarea>
+                </div>
+
+                <button type="submit" class="btn">Замовити трансфер</button>
+            </form>
+
+            <div id="successMessage" class="success-message">
+                <div class="icon">✅</div>
+                <h2>Дякуємо!</h2>
+                <p>Ваш запит на трансфер прийнято.<br>Ми зв'яжемося з вами найближчим часом.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Встановлюємо мінімальну дату на сьогодні
+        const dateInput = document.getElementById('date');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+
+        // Обробка форми
+        document.getElementById('transferForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Тут можна додати відправку на сервер
+            console.log('Дані форми:', data);
+            
+            // Показуємо повідомлення про успіх
+            this.style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+            
+            // Через 5 секунд повертаємо форму
+            setTimeout(() => {
+                this.reset();
+                this.style.display = 'block';
+                document.getElementById('successMessage').classList.remove('show');
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
